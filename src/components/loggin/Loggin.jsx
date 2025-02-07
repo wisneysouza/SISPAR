@@ -1,38 +1,36 @@
-import Logo from "../../assets/Tela <Login />
-<logo-ws className="png"></logo-ws>."
-function Loggin(){
-    return(
-        <>
-        <main>
-            <section>
-                backgroud 
-            </section>
+import Logo from "../../assets/Tela Login/logo-ws.png";
+import styles from"./Loggin.module.scss"
 
-            <section>
-                <img src={Logo} alt="Logo da Wilson Sons" />
+function Loggin() {
+  return (
+    
+      <main>
+        <section className={styles.s}>oi</section>
 
-                <h1></h1>
+        <section>
+          <img src={Logo} alt="Logo da Wilson Sons" />
 
-                <h2></h2>
+          <h1>Boas vindas ao Novo Portal SISPAR</h1>
 
-                <p></p>
+          <p>Sistema de Emissão de Boletos e Parcelamento</p>
 
-                <form action="">
-                    <input type="email" name="email" id="email" placeholder="Email"/>
-                    <input type="password" name="email" id="email" placeholder="Senha" />
+          <form action="">
+            <input type="email" name="email" id="email" placeholder="Email" />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Senha"
+            />
 
-                   <a href=""> </a>
-                   <button></button>
-                   <ton>
-        
+            <a href="">Esqueci minha senha </a>
+            <button>Entrar</button>
+            <button>Criar conta</button>
+          </form>
+        </section>
+      </main>
+    
+  );
+}
 
-                </form>
-
-            </section>
-        </main>
-        
-        </>
-    )
-} 
-
-export default Loggin
+export default Loggin;
