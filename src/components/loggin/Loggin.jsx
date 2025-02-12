@@ -23,8 +23,8 @@ function Loggin() {
           <a href="">Esqueci minha senha </a>
 
           <div>
-          <button className="">Entrar</button>
-          <button>Criar conta</button>
+          <button className={styles.buttonEntrar}>Entrar</button>
+          <button className={styles.buttonCriar}>Criar conta</button>
           </div>
           
         </form>

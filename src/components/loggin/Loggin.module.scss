@@ -1,38 +1,80 @@
-    .containerImagem{
-        background-image: url("../../assets/Tela Login/imagem tela de login.png");
-        background-color: yellow;
-        background-repeat: no-repeat;
-        background-size: 100%;
-        border: solid red;
-    
-       height: 100vh;
-       width: 60%;
-       display:flex;
-       flex-direction:row;
-       justify-content: center;
-       
-    
-        
-    }
-    .containerForm{
-        border: solid blue;
-        width: 40%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    main{
-        
-        display: flex;
-        
-    }
+main {
+  display: flex;
+}
+.containerImagem {
+  background-image: url("../../assets/Tela Login/imagem tela de login.png");
+  //background-color: yellow;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  //border: solid red;
+  height: 100vh;
+  width: 60%;
+}
+.containerForm {
+  border: solid blue;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    width: 37%;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    border: solid yellow;
+    font-family: "inter", sans-serif;
+  }
+  p{
+    font-weight: 700;
+    font-size: 1rem;
+    color: #0844C4
+  }
+}
 
-    form{
-        border: solid green;
-        display: flex;
-        flex-direction: column;
-        width: 70%;
-        height: 20vh;
-        justify-content: space-between;
+form {
+  border: solid green;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 20vh;
+  justify-content: space-between;
+  align-items: center;
+
+  a{font-size: 1rem;
+    color: #23282F;
+    font-weight: 400;
+    text-decoration: none;
+  }
+  input {
+    width: 20vw;
+    height: 5vh;
+    border-radius: 6px;
+    border: 0.8px solid #CBD4E1;
+  }
+  input:hover{
+    border: 0.8px solid #001A3D
+  }
+  div {
+    //border: solid red;
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+
+    .buttonEntrar {
+      background-color: #001A3D;
+      width: 6vw;
+      height: 5vh;
+      border-radius: 6px;
+      color: #F1F4F9;
     }
+    .buttonCriar {
+      background-color: #00bedd;
+      width: 6vw;
+      height: 5vh;
+      border-radius: 6px;
+      color: #F1F4F9;
+    }
+  }
+}
