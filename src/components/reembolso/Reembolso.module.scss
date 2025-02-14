@@ -1,7 +1,84 @@
 header{
-    width: 8vw;
+    width: 10%;
+    height: 5vh;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     border: solid red;
 
 }
+.mainReembolso{
+ height: 95vh;
+ border: solid blue; 
+ display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 30rem;  
+
+}
+
+.containerCards{
+border: solid green;
+width: 40vw;
+height: 35vh;
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+}
+article{
+    border: solid red;
+    width: 40vw;
+    height: 18vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerStatus{
+    border: solid yellow;
+    width: 40vw;
+    height: 15vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    div{
+        border: solid orange;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 20%;
+        height: 5vh;
+    }
+
+   }
+
+   .imgSolicitados{
+    background-color: #00bedd;
+    border-radius: 6px;
+    padding: 6px;
+}
+.imgEmAnalise{
+    background-color: #e56700;
+    border-radius: 6px;
+    padding: 6px;
+}
+.imgAprovados{
+    background-color: #007a6a;
+    border-radius: 6px;
+    padding: 6px;
+}
+.imgRejeitados{
+    background-color: #a60b2f;
+    border-radius: 6px;
+    padding: 6px;
+}
+.containerSistema{
+    display: flex;
+    width: 10vw;
+    justify-content: space-between;
+    border: solid ;
+}
+

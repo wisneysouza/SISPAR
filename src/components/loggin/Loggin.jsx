@@ -3,13 +3,16 @@ import Logo from "../../assets/Tela Login/logo-ws.png";
 import styles from "./Loggin.module.scss";
 
 function Loggin() {
-  const navigate = useNavigate(); //Iniciando o hook useNavigate
+  const navigate = useNavigate()
+  const irPraReembolso = () => {
+    navigate("/reembolso")
+  }
 
-  const irParaReembolso = () => {
-    navigate("/reembolso");
-  };
+  
+
   return (
-    <main>
+    <main className={styles.mainReembolso}>
+
       <section className={styles.containerImagem}></section>
 
       <section className={styles.containerForm}>
@@ -27,7 +30,7 @@ function Loggin() {
           <a href="">Esqueci minha senha </a>
 
           <div>
-            <button onClick={irParaReembolso} className={styles.buttonEntrar}>Entrar</button>
+            <button onClick={irPraReembolso} className={styles.buttonEntrar}>Entrar</button>
             <button className={styles.buttonCriar}>Criar conta</button>
           </div>
         </form>

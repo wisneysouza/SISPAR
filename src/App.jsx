@@ -6,13 +6,14 @@ import "./global.scss";
 
 function App() {
   return (
-    <BrowserRouter>
+   <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Loggin />} />
-        <Route path="/reembolso" element={<Reembolso />} />
-        <Route path= "/solicitacao" element={<Solicitacao/>} />
+       <Route path="/" element={<Loggin />} />
+       <Route path="/reembolso" element={<Reembolso />} />
+       <Route path= "/solicitacao" element={<Solicitacao/>} />
       </Routes>
     </BrowserRouter>
+   
   );
 }
 export default App;
