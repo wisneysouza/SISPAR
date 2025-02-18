@@ -1,84 +1,110 @@
-header{
-    width: 10%;
-    height: 5vh;
+.layout{
+  display: flex;
+}
+header {
+  width: 10%;
+  height: 5vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  //border: solid red;
+  p{
+    font-size: 1rem;
+    font-weight: 400;
+  }
+}
+.mainReembolso {
+  height: 95vh;
+  //border: solid blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 30rem;
+
+  h1{
+    font-size: 2rem;
+    font-weight: 700;    
+  }
+
+  p{
+    font-size: 1rem;
+    font-weight: 400;
+   }
+}
+
+.containerCards {
+  //border: solid green;
+  width: 45vw;
+  height: 20vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+article {
+  border: 0.8px solid #CBD4E1;
+  border-radius: 6px;
+  margin-top: 1rem; 
+  width: 14vw;
+  height: 18vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center ;
+}
+
+.containerStatus {
+  border: 0.8px solid #CBD4E1;
+  border-radius: 6px;
+  margin-top: 1rem;
+  width: 45vw;
+  height: 12vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  div {
+    //border: solid orange;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    border: solid red;
-
-}
-.mainReembolso{
- height: 95vh;
- border: solid blue; 
- display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 30rem;  
-
+    width: 23%;
+    height: 5vh;
+  }
 }
 
-.containerCards{
-border: solid green;
-width: 40vw;
-height: 35vh;
-display: flex;
-justify-content: space-between;
-align-items: center;
+.imgSolicitados {
+  background-color: #00bedd;
+  border-radius: 6px;
+  padding: 6px;
+}
+.imgEmAnalise {
+  background-color: #e56700;
+  border-radius: 6px;
+  padding: 4.5px;
+}
+.imgAprovados {
+  background-color: #007a6a;
+  border-radius: 6px;
+  padding: 6px;
+}
+.imgRejeitados {
+  background-color: #a60b2f;
+  border-radius: 6px;
+  padding: 6px;
+}
+.containerSistema {
+  display: flex;
+  width: 18%;
+  margin-top: 1rem;
+  justify-content: space-between;
+  //border: solid;
 
-}
-article{
-    border: solid red;
-    width: 40vw;
-    height: 18vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  p{
+    font-size: 1rem;
+    font-weight: 400;
+    color: #0844C4;
+  }
 }
 
-.containerStatus{
-    border: solid yellow;
-    width: 40vw;
-    height: 15vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    div{
-        border: solid orange;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        width: 20%;
-        height: 5vh;
-    }
-
-   }
-
-   .imgSolicitados{
-    background-color: #00bedd;
-    border-radius: 6px;
-    padding: 6px;
-}
-.imgEmAnalise{
-    background-color: #e56700;
-    border-radius: 6px;
-    padding: 6px;
-}
-.imgAprovados{
-    background-color: #007a6a;
-    border-radius: 6px;
-    padding: 6px;
-}
-.imgRejeitados{
-    background-color: #a60b2f;
-    border-radius: 6px;
-    padding: 6px;
-}
-.containerSistema{
-    display: flex;
-    width: 10vw;
-    justify-content: space-between;
-    border: solid ;
-}
 

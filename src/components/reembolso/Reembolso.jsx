@@ -10,10 +10,16 @@ import Sistema from "../../assets/Dashboard/Sistema-atualizado.png";
 import SolicitarHistorico from "../../assets/Dashboard/Solicitar - Histórico.png";
 import SolicitarReembolso from "../../assets/Dashboard/Solicitar - Reembolso.png";
 
+//importando o componente navBar
+
+import NavBar from "../navbar/NavBar.jsx"
+
 function Reembolso() {
   return (
 
-    <div>
+    <div className={styles.layout}>
+
+      <NavBar />
 
       <header>
         <img src={Home} alt="Casinha da header" />
@@ -30,6 +36,7 @@ function Reembolso() {
         </p>
 
         <section className={styles.containerCards}>
+            
           <article>
             <img
               src={SolicitarReembolso}
