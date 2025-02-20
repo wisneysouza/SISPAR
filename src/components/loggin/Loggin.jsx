@@ -22,7 +22,7 @@ function Loggin() {
 
         <p>Sistema de Emissão de Boletos e Parcelamento</p>
 
-        <form action="">
+        <form className={styles.formLogin}>
           <input type="email" name="email" id="email" placeholder="Email" />
           <input type="password" name="password" id="password" placeholder="Senha"
           />

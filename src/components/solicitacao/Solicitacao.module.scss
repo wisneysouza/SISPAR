@@ -1,0 +1,84 @@
+.headerSolicitacao{
+    //border: solid red;
+    width: 20%;
+    
+    }
+
+    .layoutSolicitacao{
+        display: flex;
+        //border: solid pink;
+    }
+    .containerPrincipalSolicitacao{
+        width: 95%;
+    }
+.formSolicitacao{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    //border: solid;
+}
+
+//Estilização padrão dos inputs, select e label.
+//Quando o padrão de mais de um item for o mesmo, mencionar eles separando com virgula e a chaves será aberta no último.
+input,
+select{ 
+    width: 100%;
+    height: 4vh;
+    border-radius: 6px;
+    border: 0.8px solid #cbd4e1;
+}
+
+label{ 
+    color: #23282f;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+//Estilização do grupo 1
+
+.grupo1{
+   // border: solid;
+    width: 40%;
+    height: 25vh;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+}
+
+.inputNome{
+    //border: solid red;
+    width: 45%;
+}
+.inputEmpresa{
+    //border: solid red;
+    width: 25%;
+}
+.inputPrestacao{
+    //border: solid red;
+    width: 25%;
+}
+.inputMotivo{
+    //border: solid red;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    textarea{
+        height: 5vh;
+    }
+}
+
+//Estilização da barra
+
+.barraVertical{
+    height: 25vh;
+    width: 0.1vw;
+    background-color: #cbd4e1;
+}
+
+//Estilização grupo 2
+
+.grupo2{
+    border: solid green;
+    width: 55%;
+}
