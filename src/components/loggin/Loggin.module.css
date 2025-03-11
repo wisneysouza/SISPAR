@@ -1,5 +1,80 @@
-main .s {
+main {
+  display: flex;
+}
+
+.containerImagem {
   background-image: url("../../assets/Tela Login/imagem tela de login.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
   height: 100vh;
-  width: 50vw;
+  width: 60%;
+}
+
+.containerForm {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.containerForm h1 {
+  width: 50%;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  font-family: "inter", sans-serif;
+}
+.containerForm p {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0844c4;
+}
+
+.formLogin {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 20vh;
+  justify-content: space-between;
+  align-items: center;
+}
+.formLogin a {
+  font-size: 1rem;
+  color: #23282f;
+  font-weight: 400;
+  text-decoration: none;
+}
+.formLogin input {
+  width: 20vw;
+  height: 5vh;
+  border-radius: 6px;
+  border: 0.8px solid #cbd4e1;
+}
+.formLogin input:hover {
+  border: 0.8px solid #001a3d;
+}
+.formLogin div {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.formLogin div .buttonEntrar {
+  background-color: #001a3d;
+  border: 0.8px solid #cbd4e1;
+  width: 6vw;
+  height: 5vh;
+  border-radius: 6px;
+  color: #f1f4f9;
+}
+.formLogin div .buttonCriar:hover {
+  background-color: #00aac7;
+}
+.formLogin div .buttonCriar {
+  background-color: #00bedd;
+  border: 0.8px solid #cbd4e1;
+  width: 6vw;
+  height: 5vh;
+  border-radius: 6px;
+  color: #f1f4f9;
 }/*# sourceMappingURL=Loggin.module.css.map */

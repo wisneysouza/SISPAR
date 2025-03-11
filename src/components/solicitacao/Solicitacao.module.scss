@@ -12,7 +12,7 @@
         width: 95%;
     }
     .mainSolicitacao{
-        border:  solid blue;
+        //border:  solid blue;
         display: flex;
         width: 100%;
         height: 85%;
@@ -152,7 +152,7 @@ label{
 
 table{
     width: 100%;
-    border:  solid yellow;
+    //border:  solid yellow;
     border-collapse: collapse;
     font-size: 1rem;
 }
@@ -170,7 +170,7 @@ th{
     text-align: center;
 }
 .total{
-    border:  solid;
+    //border:  solid;
     width: 100%;
     height: 10vh;
     display: flex;
@@ -178,16 +178,16 @@ th{
     align-items: center;
 }
 .totalFaturado{
-border: solid;
+//border: solid;
 width: 10vw;
 }
 .totalDespesa{
-    border:  solid;
+    //border:  solid;
     width: 10vw;
 
 }
 .botoesAnalise{
-    border:  solid red;
+    //border:  solid red;
     width: 23%;
     display: flex;
     justify-content: space-evenly;

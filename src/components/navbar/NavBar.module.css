@@ -1,1 +1,34 @@
-/*# sourceMappingURL=NavBar.module.css.map */
+.navBarEstilo {
+  height: 100vh;
+  width: 5%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+}
+.navBarEstilo button {
+  background-color: #0844c4;
+  width: 60%;
+  height: 5vh;
+  border-radius: 6px;
+}
+.navBarEstilo .buttonSair {
+  background-color: #63758d;
+}
+.navBarEstilo section {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+}
+.navBarEstilo section .boxButton {
+  width: 100%;
+  height: 35vh;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+}/*# sourceMappingURL=NavBar.module.css.map */
