@@ -206,17 +206,17 @@ function Solicitacao() {
           <div className={styles.total}>
             <div className={styles.totalFaturado}>
               <label htmlFor="">Total Faturado</label>
-              <input type="number" name="" id="" />
+              <input type="number" name="totalFaturado" id="totalFaturado" />
             </div>
 
             <div className={styles.totalDespesa}>
               <label htmlFor="">Total Despesa</label>
-              <input type="number" name="" id="" />
+              <input type="number" name="totalDespesa" id="totalDespesa" />
             </div>
 
             <div className={styles.botoesAnalise}>
             <button className={styles.botaoEnviarAnalise}>
-                <img src={Check} alt="ícone do botão cancelar" /> Enviar Análise</button>
+                <img src={Check} alt="ícone do botão enviar" /> Enviar para Análise</button>
                 <button className={styles.cancelar}>
                   <img src={X} alt="ícone do botão cancelar" />
                    Cancelar Solicitação
