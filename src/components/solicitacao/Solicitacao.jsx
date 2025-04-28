@@ -10,8 +10,50 @@ import Motivo from "../../assets/Solicitacao/motivo.png";
 import Del from "../../assets/Solicitacao/deletar.png";
 import Check from "../../assets/Solicitacao/check.png";
 import X from "../../assets/Solicitacao/x.png"
+import { useState } from "react";
 
 function Solicitacao() {
+  const [colaborador, setColaborador] = useState(""); // Estado para o campo colaborador
+  const [empresa, setEmpresa] = useState(""); // Estado para o campo empresa
+  const [nPrestacao, setnPrestacao] = useState(""); // Estado para o campo número de prestação
+  const [descricao, setDescricao] = useState(""); // Estado para o campo  descrição
+  const [data, setData] = useState(""); // Estado para o campo data
+  const [motivo, setMotivo] = useState(""); // Estado para o campo motivo  //ESSE ESTADO É PARA QUEM TÁ FAZENDO AVANÇADO UTILIZANDO MODAL
+  const [tipoReembolso, setTipoReembolso] = useState(""); // Estado para o campo tipo de reembolso
+  const [centroCusto, setCentroCusto] = useState(""); // Estado para o campo centro de custo
+  const [ordemInterna, setorOrdemInterna] = useState(""); // Estado para o campo ordem interna
+  const [divisao, setDivisao] = useState(""); // Estado para o campo divisão
+  const [pep, setPep] = useState(""); // Estado para o campo pep
+  const [moeda, setMoeda] = useState(""); // Estado para o campo moeda
+  const [distanciaKm, setDistanciaKm] = useState(""); // Estado para o campo distância km
+  const [valorKm, setValorKm] = useState(""); // Estado para o campo valor km
+  const [valorFaturado, setValorFaturado] = useState(""); // Estado para o campo valor faturado
+  const [despesa, setDespesa] = useState(""); // Estado para o campo despesa
+  const[dadosReembolso, setDadosReembolso] = useState([]);
+
+  //--função para capturar os valroes dos estados --
+
+const handleSubmit = () => {
+  const objetosReembolso = {
+    colaborador,
+    empresa,
+    nPrestacao,
+    descricao,
+    data,
+    tipoReembolso,
+    ordemInterna,
+    centroCusto,
+    divisao,
+    pep,
+    moeda,
+    distanciaKm,
+    valorKm,
+    valorFaturado,
+    despesa
+  };
+setDadosReembolso(dadosReembolso.concat(objetosReembolso))
+};
+
   return (
     <div className={styles.layoutSolicitacao}>
       <NavBar />
@@ -31,24 +73,22 @@ function Solicitacao() {
             <div className={styles.grupo1}>
               <div className={styles.inputNome}>
                 <label htmlFor="">Nome Completo</label>
-                <input type="text" name="" id="nome-completo" />
+                <input value={colaborador} type="text" name="" id="nome-completo" />
               </div>
 
               <div className={styles.inputEmpresa}>
                 <label htmlFor="">Empresa</label>
-                <input type="text" name="" id="empresa" />
+                <input value={empresa} type="text" name="" id="empresa" />
               </div>
 
               <div className={styles.inputPrestacao}>
                 <label htmlFor="">N° Prest. Contas</label>
-                <input type="text" name="" id="prestacao-contas" />
+                <input value={nPrestacao} type="text" name="" id="prestacao-contas" />
               </div>
 
               <div className={styles.inputMotivo}>
                 <label htmlFor="">Descrição / Motivo do Reembolso</label>
-                <textarea name="" id="">
-                  {""}
-                </textarea>
+                <textarea value={descricao} name="" id="">   {""}     </textarea>
               </div>
             </div>
 
@@ -57,11 +97,12 @@ function Solicitacao() {
             <div className={styles.grupo2}>
               <div className={styles.inputData}>
                 <label htmlFor="">Data</label>
-                <input type="date" name="" id="" />
+                <input value={data} type="date" name="" id="" />
               </div>
 
               <div className={styles.tipoDeDespesa}>
                 <label htmlFor="">Tipo de Despesa</label>
+                
 
                 <select name="" id="">
                   <option value="Selecionar"></option>
@@ -92,21 +133,22 @@ function Solicitacao() {
 
               <div className={styles.ordem}>
                 <label htmlFor="">Ord. Int.</label>
-                <input type="number" name="" id="" />
+                <input value={ordemInterna} type="number" name="" id="" />
               </div>
 
               <div className={styles.divisoes}>
                 <label htmlFor="">Div.</label>
-                <input type="number" name="" id="" />
+                <input value={divisao} type="number" name="" id="" />
               </div>
 
               <div className={styles.pep}>
                 <label htmlFor="">PEP</label>
-                <input type="number" name="" id="" />
+                <input value={pep} type="number" name="" id="" />
               </div>
 
               <div className={styles.moeda}>
                 <label htmlFor="">Moeda</label>
+                <input value={moeda} type="text" name="" id="" />
                 <select name="" id="">
                   <option value="">Selecionar</option>
                   <option value="">BRL</option>
@@ -117,22 +159,22 @@ function Solicitacao() {
 
               <div className={styles.distancia}>
                 <label htmlFor="">Dist / Km</label>
-                <input type="text" name="" id="" />
+                <input value={distanciaKm} distancia type="text" name="" id="" />
               </div>
 
               <div className={styles.valorKm}>
                 <label htmlFor="">Valor / Km</label>
-                <input type="number" name="" id="" />
+                <input value={valorKm} type="number" name="" id="" />
               </div>
 
               <div className={styles.valorFaturado}>
                 <label htmlFor="">Valor Faturado</label>
-                <input type="number" name="" id="" />
+                <input value={valorFaturado} type="number" name="" id="" />
               </div>
 
               <div className={styles.despesa}>
                 <label htmlFor="">Despesa</label>
-                <input type="number" name="" id="" />
+                <input value={despesa} type="number" name="" id="" />
               </div>
 
               <div className={styles.botoes}>
@@ -178,23 +220,23 @@ function Solicitacao() {
                 <td>
                   <img src={Lixeira} alt="ícone da lixeira" />
                 </td>
-                <td>Maria Vagas Figueira de Souza Santos Silva</td>
-                <td>Shell</td>
-                <td>345</td>
-                <td>10/07</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>
                   <img src={Motivo} alt="ícone do motivo" />
                 </td>
-                <td>Alimentação</td>
-                <td>Fin</td>
-                <td>2</td>
-                <td>1</td>
-                <td>2</td>
-                <td>BRL</td>
-                <td>20km</td>
-                <td>5.00</td>
-                <td>20.00</td>
-                <td>45.00</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             </tbody>
           </table>
@@ -206,12 +248,12 @@ function Solicitacao() {
           <div className={styles.total}>
             <div className={styles.totalFaturado}>
               <label htmlFor="">Total Faturado</label>
-              <input type="number" name="totalFaturado" id="totalFaturado" />
+              <input value={totalFaturado} type="number" name="totalFaturado" id="totalFaturado" />
             </div>
 
             <div className={styles.totalDespesa}>
               <label htmlFor="">Total Despesa</label>
-              <input type="number" name="totalDespesa" id="totalDespesa" />
+              <input value={totalDespesa} type="number" name="totalDespesa" id="totalDespesa" />
             </div>
 
             <div className={styles.botoesAnalise}>
