@@ -16,7 +16,7 @@ function Loggin() {
   const fazerLogin = async (e) => {
     e.preventDefault();//previne o carregamento da pagina
 
-   try{
+  try{
     const resposta = await api.post("/colaborador/login",{
       "email": email,
     "senha":senha
@@ -26,10 +26,10 @@ function Loggin() {
   irPraReembolso()
 
 
-   } catch(error){
+  } catch(error){
     console.log("Erro ao fazer o login: ",error)
     alert("Deu erro no login aqui ó")
-   } 
+  } 
 
   } 
 
