@@ -55,7 +55,7 @@ function Loggin() {
           <a href="">Esqueci minha senha </a>
 
           <div>
-            <button onClick={fazer login} className={styles.buttonEntrar}>Entrar</button>
+            <button onClick={fazer.login} className={styles.buttonEntrar}>Entrar</button>
             <button className={styles.buttonCriar}>Criar conta</button>
           </div>
         </form>
