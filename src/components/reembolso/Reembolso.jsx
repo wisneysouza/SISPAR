@@ -13,8 +13,11 @@ import SolicitarReembolso from "../../assets/Dashboard/Solicitar - Reembolso.png
 //importando o componente navBar
 
 import NavBar from "../navbar/NavBar.jsx"
+import { useNavigate } from "react-router-dom";
 
 function Reembolso() {
+  const navigate = useNavigate()
+
   return (
 
     <div className={styles.layout}>

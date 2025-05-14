@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import NavBar from "../navbar/NavBar.jsx";
 //importando o componente NavBar
 import Home from "../../assets/Dashboard/home.png";
@@ -10,9 +12,15 @@ import Motivo from "../../assets/Solicitacao/motivo.png";
 import Del from "../../assets/Solicitacao/deletar.png";
 import Check from "../../assets/Solicitacao/check.png";
 import X from "../../assets/Solicitacao/x.png"
-import { useState } from "react";
+
+import Api from "../../Services/Api.jsx"; //importando a conexão
 
 function Solicitacao() {
+   //Usando o hook useState do React, que serve para criar e controlar um estado dentro do componente.
+  // const [estado, setEstado] = useState("")
+  //estado:  é a variável que guarda os dados (o valor atual).
+  //setEstado: é a função que atualiza esse valor.
+  // useState("")  O valor inicial é uma string vazia (""), ou seja, ainda não foi preenchido nada.
   const [colaborador, setColaborador] = useState(""); // Estado para o campo colaborador
   const [empresa, setEmpresa] = useState(""); // Estado para o campo empresa
   const [nPrestacao, setnPrestacao] = useState(""); // Estado para o campo número de prestação
@@ -31,7 +39,22 @@ function Solicitacao() {
   const [despesa, setDespesa] = useState(""); // Estado para o campo despesa
   const[dadosReembolso, setDadosReembolso] = useState([]);
 
-  //--função para capturar os valroes dos estados --
+  // Esse é o array que irá receber os dados em formato de objeto
+  //useState([])  Estamos dizendo que o estado vai começar como um array vazio ([]), porque vamos armazenar vários objetos de reembolso ali.
+  //Criei uma caixinha chamada dadosReembolso para guardar todos os reembolsos que o usuário for adicionando.Ela começa vazia, e eu posso atualizar essa lista com a função setDadosReembolso.
+const [enviado, setEnviado] = useState(false);
+
+useEffect(() =>{
+  if(enviado){
+    setDadosReembolso([]); //limpa os dados após o envio
+    setEnviado(false); //reseta o estado de controle
+  }
+}, [enviado]);
+
+  //-------------------------------------FUNÇÃO PARA CAPTURAR OS VALORES DOS ESTADOS-----------------------
+
+  // Essa função captura os valores dos estados, coloca eles organizados em objetos que serão adicionados no array dadosReembolso para serem exibidos no map
+  // Função que é chamada quando o formulário é enviado
 
 const handleSubmit = () => {
   const objetosReembolso = {
@@ -51,8 +74,89 @@ const handleSubmit = () => {
     valorFaturado,
     despesa
   };
+  //alert("Formulário enviado com sucesso!"); //mostra um alerta na tela para o usuário, avisando que o formulário foi enviado corretamente
+
+
 setDadosReembolso(dadosReembolso.concat(objetosReembolso))
+
+    // Aqui acontece a atualização da lista de reembolsos.
+    // setDadosReembolso(...) atualiza o estado com essa nova lista.
+    // dadosReembolso é o estado atual com os reembolsos anteriores.
+    // concat(objetoReembolso) adiciona o novo reembolso no final da lista, sem modificar os anteriores.
+  
+  limparCampos();//quando clicar em salvar, ativa a função de limpar os campos
+
 };
+
+  //--------------------FUNÇÃO PARA ENVIAR OS DADOS PARA O BD -----------
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NDM5ODU5NiwianRpIjoiOTdkNWI0YmUtOTU3My00ZmEzLTlkY2ItMjE2MGY3MmRiZmUzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3NDQzOTg1OTYsImNzcmYiOiIwNGViOTcwNy05NDFjLTQwYWItOTJiZS04ZjU0MTliNGFmOTQiLCJleHAiOjE3NDQzOTk0OTZ9.R87xKzHSVishWF8ZNjWnRnhfoEmS0GXx4sN2y6TUR70";
+
+  //// Função que será chamada quando quisermos enviar os dados do reembolso
+  const enviarParaAnalise = async () => {
+    try {
+      const response = await Api.post("/refunds/new", dadosReembolso, {
+        headers: {
+          authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+  
+      setEnviado(true); // Aciona o useEffect
+    } catch (error) {
+      console.error("Erro ao enviar:", error);
+    }
+  };
+
+  ///----------------FUNÇÃO DE DELETAR ----------------------
+  // Essa função serve para remover um item da lista de reembolsos, com base no número da posição dele (índice). Ela cria uma nova lista sem aquele item e atualiza o estado com essa nova lista.
+
+  const handleDelete = (index) => {
+    setDadosReembolso(dadosReembolso.filter((item, i) => i !== index));
+  };
+
+  // Essa é uma função chamada handleDelete.
+  // Ela recebe como parâmetro um index, que representa a posição do item que queremos remover da lista dadosReembolso.
+
+  // setDadosReembolso(...)  Aqui usamos o setDadosReembolso, que é a função que atualiza o estado dadosReembolso. Ou seja, estamos dizendo: "Atualize a lista de reembolsos com uma nova lista, sem o item que queremos excluir."
+
+  // dadosReembolso.filter((item, i) => i !== index)
+  // filter percorre toda a lista de reembolsos.
+  // Para cada item da lista, ele também pega o índice atual, representado por i. I = ÍNDICE ATUAL
+
+  // A condição i !== index diz: "só mantenha os itens cujo índice for diferente do índice que queremos remover."
+
+  // Resultado: o item com o índice passado na função é removido da lista, e todos os outros permanecem.
+
+  //--------------FUNÇÃO DE LIMPAR OS INPUTS QUANDO CLICAR EM SALVAR -----------------------
+
+  const limparCampos = () => {
+    setColaborador(""),
+      setEmpresa(""),
+      setnPrestacao(""),
+      setDescricao(""),
+      setData(""),
+      setMotivo(""),
+      setTipoReembolso(""),
+      setCentroCusto(""),
+      setorOrdemInterna(""),
+      setDivisao(""),
+      setPep(""),
+      setMoeda(""),
+      setDistanciaKm(""),
+      setValorKm(""),
+      setValorFaturado(""),
+      setDespesa("");
+  };
+
+  //---------------FUNÇÃO PARA LIMPAR TODA A LISTA, AO CLICAR NO BOTÃO CANCELAR REEMBOLSO ----
+
+  const cancelarSolicitacao = () => {
+    setDadosReembolso([]); // limpa todos os dados salvos
+    limparCampos(); // limpa os inputs também (se quiser)
+  };
+
+  //-------------------
 
   return (
     <div className={styles.layoutSolicitacao}>
@@ -69,26 +173,38 @@ setDadosReembolso(dadosReembolso.concat(objetosReembolso))
         </header>
 
         <main className={styles.mainSolicitacao}>
-          <form className={styles.formSolicitacao}>
+          {/* onSubmit:  É um evento que dispara quando você clica no botão de “Enviar” 
+       (e) => e.preventDefault():Essa é uma função que bloqueia o comportamento padrão do formulário. */}
+
+          {/* OBS: Em HTML puro, quando você envia um <form>, ele recarrega a página automaticamente.
+      Só que no React a gente não quer que isso aconteça, porque a gente controla tudo com JavaScript e hooks (useState, useEffect, etc).
+      Por isso, usamos e.preventDefault() pra impedir o recarregamento da página. */}
+
+          <form  onSubmit={(e) => e.preventDefault()} className={styles.formSolicitacao}>
             <div className={styles.grupo1}>
               <div className={styles.inputNome}>
-                <label htmlFor="">Nome Completo</label>
-                <input value={colaborador} type="text" name="" id="nome-completo" />
+                {/* onChange:  é um evento no React (e também no HTML puro) que dispara quando o valor de um campo muda.
+Diz ao React: “toda vez que o usuário digitar algo nesse campo, atualize a variável colaborador com o novo valor”. 
+e.target.value é o que foi digitado pelo usuário.
+*/}
+
+                <label htmlFor="nome">Nome Completo</label>
+                <input value={colaborador} type="text" name="colaborador" onChange={(e) => setColaborador(e.target.value)}/>
               </div>
 
               <div className={styles.inputEmpresa}>
-                <label htmlFor="">Empresa</label>
-                <input value={empresa} type="text" name="" id="empresa" />
+                <label htmlFor="empresa">Empresa</label>
+                <input value={empresa} type="text" name="empresa"  onChange={(e) => setEmpresa(e.target.value)}/>
               </div>
 
               <div className={styles.inputPrestacao}>
-                <label htmlFor="">N° Prest. Contas</label>
-                <input value={nPrestacao} type="text" name="" id="prestacao-contas" />
+                <label htmlFor="prestacao">N° Prest. Contas</label>
+                <input value={nPrestacao} type="number" name="nPrestacao"  onChange={(e) => setnPrestacao(e.target.value)} />
               </div>
 
               <div className={styles.inputMotivo}>
-                <label htmlFor="">Descrição / Motivo do Reembolso</label>
-                <textarea value={descricao} name="" id="">   {""}     </textarea>
+                <label htmlFor="descricao">Descrição / Motivo do Reembolso</label>
+                <textarea value={descricao} name="descricao"  onChange={(e) => setDescricao(e.target.value)}>  </textarea>
               </div>
             </div>
 
@@ -96,91 +212,94 @@ setDadosReembolso(dadosReembolso.concat(objetosReembolso))
 
             <div className={styles.grupo2}>
               <div className={styles.inputData}>
-                <label htmlFor="">Data</label>
-                <input value={data} type="date" name="" id="" />
+                <label htmlFor="date">Data</label>
+                <input value={data} type="date" name="data"  onChange={(e) => setData(e.target.value)} />
               </div>
 
               <div className={styles.tipoDeDespesa}>
-                <label htmlFor="">Tipo de Despesa</label>
+                <label htmlFor="tipoReembolso">Tipo de Despesa</label>
                 
 
-                <select name="" id="">
-                  <option value="Selecionar"></option>
-                  <option value="">Alimentação</option>
-                  <option value="">Combutíval</option>
-                  <option value="">Condução</option>
-                  <option value="">Estacionamento</option>
-                  <option value="">Viagem Admin.</option>
-                  <option value="">Viagem Operacional</option>
-                  <option value="">Eventos de Representação</option>
+                <select name="tipoReembolso" id="tipoReembolso" onChange={(e) => setTipoReembolso(e.target.value)}>
+                  <option value="selecionar">Selecionar</option>
+                  <option value="alimentacao">Alimentação</option>
+                  <option value="combustivel">Combutíval</option>
+                  <option value="conducao">Condução</option>
+                  <option value="estacionamento">Estacionamento</option>
+                  <option value="viagem adm">Viagem Admin.</option>
+                  <option value="viagem oper">Viagem Operacional</option>
+                  <option value="eventos">Eventos de Representação</option>
                 </select>
               </div>
 
               <div className={styles.centroDeCusto}>
-                <label htmlFor="">Centro de Custo</label>
+                <label htmlFor="custo">Centro de Custo</label>
 
-                <select name="" id="">
+                <select name="centroCusto" id="centroCusto" value={centroCusto} onChange={(e) => setCentroCusto(e.target.value)}>
+
                   <option value="">Selecionar</option>
-                  <option value="">
+                  <option value="FIN CONTROLES INTERNOS MTZ">
                     1100109002 - FIN CONTROLES INTERNOS MTZ
                   </option>
-                  <option value="">
+                  <option value="FIN VICE-PRESIDENCIA FINANCAS MTZ">
                     1100110002 - FIN VICE-PRESIDENCIA FINANCAS MTZ
                   </option>
-                  <option value="">1100110101 - FIN CONTABILIDADE MTZ</option>
+                  <option value="FIN CONTABILIDADE MTZ">1100110101 - FIN CONTABILIDADE MTZ
+                  </option>
                 </select>
               </div>
 
               <div className={styles.ordem}>
-                <label htmlFor="">Ord. Int.</label>
-                <input value={ordemInterna} type="number" name="" id="" />
+                <label htmlFor="ordemInterna">Ord. Int.</label>
+                <input value={ordemInterna} type="text" name="ordemInterna" id="ordemInterna" onChange={(e) => setorOrdemInterna(e.target.value)}/>
               </div>
 
               <div className={styles.divisoes}>
-                <label htmlFor="">Div.</label>
-                <input value={divisao} type="number" name="" id="" />
+                <label htmlFor="divisao">Div.</label>
+                <input value={divisao} type="text" name="divisao" id="divisao" onChange={(e) => setDivisao(e.target.value)} />
               </div>
 
               <div className={styles.pep}>
-                <label htmlFor="">PEP</label>
-                <input value={pep} type="number" name="" id="" />
+                <label htmlFor="pep">PEP</label>
+                <input value={pep} type="text" name="pep" id="PEP" onChange={(e) => setPep(e.target.value)} />
               </div>
 
               <div className={styles.moeda}>
-                <label htmlFor="">Moeda</label>
-                <input value={moeda} type="text" name="" id="" />
-                <select name="" id="">
+                <label htmlFor="moeda">Moeda</label>
+                <select value={moeda} name="moeda" id="coents" onChange={(e) => setMoeda(e.target.value)} >
                   <option value="">Selecionar</option>
-                  <option value="">BRL</option>
-                  <option value="">ARS</option>
-                  <option value="">USD</option>
+                  <option value="brl">BRL</option>
+                  <option value="ars">ARS</option>
+                  <option value="usd">USD</option>
                 </select>
               </div>
 
               <div className={styles.distancia}>
-                <label htmlFor="">Dist / Km</label>
-                <input value={distanciaKm} distancia type="text" name="" id="" />
+                <label htmlFor="distancia">Dist / Km</label>
+                <input value={distanciaKm} type="text" name="distanciaKm" id="distance-input" onChange={(e) => setDistanciaKm(e.target.value)} />
               </div>
 
               <div className={styles.valorKm}>
-                <label htmlFor="">Valor / Km</label>
-                <input value={valorKm} type="number" name="" id="" />
+                <label htmlFor="valor">Valor / Km</label>
+                <input value={valorKm} type="text" name="valorKm" onChange={(e) => setValorKm(e.target.value)} />
               </div>
 
               <div className={styles.valorFaturado}>
-                <label htmlFor="">Valor Faturado</label>
-                <input value={valorFaturado} type="number" name="" id="" />
+                <label htmlFor="faturado">Valor Faturado</label>
+                <input value={valorFaturado} type="text" name="valorFaturado" onChange={(e) => setValorFaturado(e.target.value)} />
               </div>
 
               <div className={styles.despesa}>
-                <label htmlFor="">Despesa</label>
-                <input value={despesa} type="number" name="" id="" />
+                <label htmlFor="taxa">Despesa</label>
+                <input value={despesa} type="text" name="despesa" id="despesa" onChange={(e) => setDespesa(e.target.value)} />
               </div>
 
               <div className={styles.botoes}>
-                <button className={styles.botaoSalvar}>+ Salvar</button>
-                <button className={styles.botaoDeletar}>
-                  <img src={Del} alt="ícone do botão deleltar" />
+                <button className={styles.botaoSalvar} onClick={handleSubmit} type="submit">
+                  <img src={Salvar} alt="" />Salvar</button>
+
+                <button className={styles.botaoDeletar}type="button" inClick={() =>{limparCampos();}}>
+                  <img src={Del} alt="ícone do botão deletar" />
                 </button>
               </div>
             </div>
@@ -216,52 +335,77 @@ setDadosReembolso(dadosReembolso.concat(objetosReembolso))
             </thead>
 
             <tbody>
-              <tr>
+              {dadosReembolso.map(item, index) }
+              <tr key={index}>
                 <td>
-                  <img src={Lixeira} alt="ícone da lixeira" />
+                  <button onClick={() => handleDelete(index)}
+                    className ={styles.buttonLixeira}
+                  > 
+
+                  
+                  <img className="styles.lixeira" src={Lixeira} alt="ícone da lixeira" />
+                </button>
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{item.colaborador}</td>
+                <td>{item.empresa}</td>
+                <td>{item.nPrestacao}</td>
+                <td>{item.data}</td>
+
                 <td>
                   <img src={Motivo} alt="ícone do motivo" />
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
+                {/*<td>{item.descricao}</td>*/}
+                <td>{item.tipoReembolso}</td>
+                <td>{item.centroCusto}</td>
+                <td>{item.ordemInterna}</td>
+                <td>{item.divisao}</td>
+                <td>{item.pep}</td>
+                <td>{item.moeda}</td>
+                <td>{item.distancia}</td>
+                <td>{item.valorKm}</td>
+                <td>{item.valorFaturado}</td>
+                <td>{item.despesa}</td>
               </tr>
+            
             </tbody>
           </table>
 
 
         </main>
-        <footer>
-            
+
+        <footer className={styles.footerSolicitacao}>
           <div className={styles.total}>
+
             <div className={styles.totalFaturado}>
-              <label htmlFor="">Total Faturado</label>
-              <input value={totalFaturado} type="number" name="totalFaturado" id="totalFaturado" />
+              <label>Total Faturado</label>
+              <input value={dadosReembolso .reduce((total, item) => total +Number(item.valorFaturado || 0),0) .toFixed(2)} type="text"/>
             </div>
 
+{/* 
+.reduce serve para percorrer a lista inteira e somar os valores de valorFaturado/despesa.
+Soma o total atual com o valor da despesa do item.
+Usa Number(...) para garantir que seja um número (evita erros caso venha uma string).
+O 0 no final é o valor inicial da soma
+
+Usa item.despesa || 0 para evitar undefined — se não tiver valor, ele usa 0.
+.tofixed: Ele formata o número com 2 casas decimais.
+Mesmo que a soma dê 150, ele vai mostrar 150.00.
+Se a soma for 10.5, vai mostrar 10.50. */}
+
             <div className={styles.totalDespesa}>
-              <label htmlFor="">Total Despesa</label>
-              <input value={totalDespesa} type="number" name="totalDespesa" id="totalDespesa" />
+              <label>Total Despesa</label>
+              <input value={dadosReembolso .reduce((total, item) => total +Number(item.despesa || 0),0) .toFixed(2)}
+              type="text"  />
             </div>
 
             <div className={styles.botoesAnalise}>
-            <button className={styles.botaoEnviarAnalise}>
-                <img src={Check} alt="ícone do botão enviar" /> Enviar para Análise</button>
-                <button className={styles.cancelar}>
+            <button className={styles.botaoEnviarAnalise} onClick={enviarParaAnalise}>
+                <img src={Check} alt="ícone do botão enviar" /> Enviar para Análise{""}</button>
+
+                <button className={styles.cancelar} onClick={cancelarSolicitacao}>
                   <img src={X} alt="ícone do botão cancelar" />
-                   Cancelar Solicitação
+                  Cancelar Solicitação{""}
                 </button>
                 </div>
 
